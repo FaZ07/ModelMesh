@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: ["master", "main"]
+  pull_request:
+    branches: ["master", "main"]
+
+jobs:
+  smoke-test:
+    name: End-to-end pipeline (TestClient)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install scikit-learn numpy pandas joblib fastapi uvicorn \
+                      python-multipart pydantic httpx requests
+
+      - name: Build sample model
+        run: |
+          cd backend
+          python scripts/make_sample_model.py
+
+      - name: Run end-to-end smoke test
+        run: |
+          cd backend
+          python scripts/smoke_test.py
+
+  lint:
+    name: Ruff lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install ruff
+      - run: ruff check backend/app --select E,F,W --ignore E501

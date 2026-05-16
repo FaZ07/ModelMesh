@@ -1,4 +1,8 @@
-# ⚙️ ModelMesh
+# ModelMesh
+
+![CI](https://github.com/FaZ07/ModelMesh/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 ### Local ML model serving + real-time drift detection + auto-retrain — no cloud, no API keys
 
@@ -129,6 +133,22 @@ Interactive docs at `http://localhost:8000/docs`.
 > Production note: the retrain job interface is intentionally identical to a
 > Celery task — swapping the worker thread for Celery + Redis is a one-file
 > change. Kept threaded here so the whole platform runs with a single command.
+
+---
+
+## Screenshots
+
+| Model Registry | Drift Dashboard | Retrain Log |
+|---|---|---|
+| Register any sklearn estimator + CSV | PSI gauge turns red, shifting feature highlighted | Shadow-promote job log with champion vs challenger |
+
+> Stream a covariate shift with `simulate_drift.py` to see the dashboard react live.
+
+---
+
+## License
+
+MIT
 
 ---
 
