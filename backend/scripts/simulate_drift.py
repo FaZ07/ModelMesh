@@ -52,7 +52,7 @@ def main() -> None:
             print(f"  req {i:3d}  [{phase}]  pred={r.json()['prediction']}")
         time.sleep(0.01)
 
-    print(f"\n✅ Sent {args.n} predictions. Open the dashboard → drift should be 'significant'.")
+    print(f"\n[OK] Sent {args.n} predictions. Open the dashboard -> drift should be 'significant'.")
 
 
 if __name__ == "__main__":

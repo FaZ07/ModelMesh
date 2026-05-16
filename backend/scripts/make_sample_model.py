@@ -41,10 +41,10 @@ def main() -> None:
     fresh[cols[0]] *= 1.05 + rng.normal(0, 0.02, len(fresh))
     fresh.assign(target=yte.values).to_csv(OUT / "fresh_labelled.csv", index=False)
 
-    print(f"✅ model.joblib  (RandomForest, holdout acc={acc:.3f})")
-    print(f"✅ train.csv     ({len(Xtr)} rows, {len(cols)} features)")
-    print(f"✅ fresh_labelled.csv ({len(fresh)} rows)")
-    print(f"   → {OUT}")
+    print(f"[OK] model.joblib  (RandomForest, holdout acc={acc:.3f})")
+    print(f"[OK] train.csv     ({len(Xtr)} rows, {len(cols)} features)")
+    print(f"[OK] fresh_labelled.csv ({len(fresh)} rows)")
+    print(f"     -> {OUT}")
 
 
 if __name__ == "__main__":

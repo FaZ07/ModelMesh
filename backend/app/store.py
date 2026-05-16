@@ -54,6 +54,7 @@ def conn():
 
 
 def init_db() -> None:
+    """Idempotent — safe to call at import and on every startup/worker boot."""
     with conn() as c:
         c.executescript(SCHEMA)
 
@@ -136,3 +137,9 @@ def prediction_count(model_id: str) -> int:
         return c.execute(
             "SELECT COUNT(*) FROM predictions WHERE model_id=?", (model_id,)
         ).fetchone()[0]
+
+
+# Ensure the schema exists no matter how the app is launched (uvicorn,
+# gunicorn worker, TestClient, a bare `import app.store`). CREATE TABLE
+# IF NOT EXISTS makes this safe to run every import.
+init_db()
