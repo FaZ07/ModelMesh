@@ -1,0 +1,14 @@
+# --- ML / data (all local, no API keys) ---
+scikit-learn>=1.4
+numpy>=1.26
+pandas>=2.2
+joblib>=1.3
+
+# --- API ---
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+pydantic>=2.6
+
+# --- demo client ---
+requests>=2.31
